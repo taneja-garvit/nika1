@@ -12,6 +12,14 @@ function Footer() {
 const [error, setError] = useState(null);
 
 function collectMail(){
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!emailRegex.test(email)) {
+    alert("Enter Valid Email");
+    setError("Please enter a valid email address.");
+    setTimeout(() => setError(null), 2000);
+    return;
+  }
   
   axios.get(`https://script.google.com/macros/s/AKfycbxF1wcL6GXVJanGmsElMO9zABwL2MzM0nAHPxvyAwjBTVEjKRl4sNM0nRx57H2ODrXNPw/exec?email=${email}`)
   .then(res => {
